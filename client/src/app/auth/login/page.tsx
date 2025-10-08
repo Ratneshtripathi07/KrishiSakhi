@@ -37,7 +37,7 @@ export default function LoginPage() {
     try {
       await requestOtp(phoneNumber);
       setMessage(t('otp_sent_note') || 'OTP sent. Enter the code you received (or use 000000 in demo mode).');
-      setStep('otp');
+      setMode('otp');
     } catch (e: any) {
       setError(e.message || (t('failed_request_otp') || 'Failed to request OTP'));
     } finally {
