@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useI18n } from '@/lib/i18n';
+import { label } from '@/lib/labels';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
 import FormField from '@/components/ui/form-field';
@@ -41,12 +42,12 @@ export default function SignupPage() {
     <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-[#F0FDF4]">
       <div className="mx-auto max-w-md min-h-[80vh] flex items-center justify-center py-12 md:py-16">
         <div className="w-full rounded-2xl bg-white shadow-xl border p-6 md:p-8">
-          <h1 className="text-2xl font-semibold tracking-tight mb-4">{t('sign_up') || 'Sign Up'}</h1>
+          <h1 className="text-2xl font-semibold tracking-tight mb-4">{label(t, 'sign_up', 'Sign up')}</h1>
           <div className="space-y-3">
-            <FormField label={t('farmer_name') || "Farmer's Name"}>
+            <FormField label={label(t, 'farmer_name', "Farmer's name")}>
               <Input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Sri. Ramesh" />
             </FormField>
-            <FormField label={t('phone_number') || 'Phone Number'} hint="+919876543210">
+            <FormField label={label(t, 'phone_number', 'Phone number')} hint="+919876543210">
               <Input type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} placeholder="+919876543210" />
             </FormField>
             <FormField label={`${t('email') || 'Email'} (${t('optional') || 'optional'})`}>

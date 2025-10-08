@@ -160,9 +160,9 @@ export default function Page() {
                 <Bug className="w-9 h-9 text-emerald-700" />
                 <div className="flex-1 flex flex-col min-w-0">
 <h3 className="text-lg font-semibold truncate" title={label(t, 'pest_check')}>{label(t, 'pest_check')}</h3>
-                  <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">{t('analyze_title') || 'Analyze crop image for issues'}</p>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">{label(t, 'analyze_title', 'Analyze crop image for issues')}</p>
                   <div className="mt-auto pt-3">
-                    <Button href="/pest-detection" variant="outline" size="sm" className="w-max">{t('analyze_button') || 'Analyse Image'}</Button>
+                    <Button href="/pest-detection" variant="outline" size="sm" className="w-max">{label(t, 'analyze_button', 'Analyze image')}</Button>
                   </div>
                 </div>
               </div>
@@ -215,7 +215,7 @@ export default function Page() {
               <div className="flex items-start gap-4">
                 <ShieldCheck className="w-9 h-9 text-emerald-700" />
                 <div>
-                  <h3 className="text-lg font-semibold">{t('for_officers') || 'For Officers'}</h3>
+                  <h3 className="text-lg font-semibold">{label(t, 'for_officers', 'For officers')}</h3>
                   <p className="text-sm text-gray-700 dark:text-gray-300">Access admin tools and geo analytics.</p>
                 </div>
               </div>

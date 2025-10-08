@@ -224,7 +224,7 @@ export default function PestDetectionPage() {
                     {t('analyzing') || 'Analyzing…'}
                   </span>
                 ) : (
-                  (t('analyze_button') || 'Analyze Image')
+                  label(t, 'analyze_button', 'Analyze image')
                 )}
               </Button>
             </form>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { fetchStates, fetchCities, fetchConstituencies } from '@/services/locationService';
 import { useI18n } from '@/lib/i18n';
+import { label } from '@/lib/labels';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
 import Select from '@/components/ui/select';
@@ -94,7 +95,7 @@ export default function UserSubmissionPage() {
           <Input value={name} onChange={(e) => setName(e.target.value)} />
         </div>
         <div>
-          <Label>{t('phone_number') || 'Phone Number'}</Label>
+          <Label>{label(t, 'phone_number', 'Phone number')}</Label>
           <Input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+91XXXXXXXXXX" />
         </div>
         <div>

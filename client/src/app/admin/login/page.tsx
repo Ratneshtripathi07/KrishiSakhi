@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { adminLoginPassword, adminLoginOtp, isAllowedGovEmail } from '@/services/adminAuthService';
 import { useI18n } from '@/lib/i18n';
+import { label } from '@/lib/labels';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
 import Label from '@/components/ui/label';
@@ -45,8 +46,8 @@ export default function AdminLoginPage() {
     <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-[#F0FDF4]">
       <div className="mx-auto max-w-md min-h-[80vh] flex items-center justify-center py-12 md:py-16">
         <div className="w-full rounded-2xl bg-white shadow-xl border p-6 md:p-8">
-          <h1 className="text-2xl font-semibold tracking-tight mb-1">{t('admin_login') || 'Admin Login'}</h1>
-          <p className="text-gray-600 text-sm mb-4">{t('gov_email_note') || 'Use your official government email (e.g., @kerala.gov.in, @punjab.gov.in, @up.gov.in)'}</p>
+          <h1 className="text-2xl font-semibold tracking-tight mb-1">{label(t, 'admin_login', 'Admin login')}</h1>
+          <p className="text-gray-600 text-sm mb-4">{label(t, 'gov_email_note', 'Use your official government email (e.g., @kerala.gov.in, @punjab.gov.in, @up.gov.in)')}</p>
 
           <div className="space-y-3">
             <Label>{t('email') || 'Email'}</Label>

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { requestOtp, login, loginWithPassword } from '@/services/authService';
 import { TOKEN_KEY } from '@/services/api';
 import { useI18n } from '@/lib/i18n';
+import { label } from '@/lib/labels';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
 import Label from '@/components/ui/label';
@@ -87,10 +88,10 @@ const onPasswordLogin = async () => {
             <div className="space-y-3">
               {mode === 'password-phone' && (
                 <>
-                  <FormField label={t('farmer_name') || "Farmer's Name"}>
+                  <FormField label={label(t, 'farmer_name', "Farmer's name")}>
                     <Input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Sri. Ramesh" />
                   </FormField>
-                  <FormField label={t('phone_number') || 'Phone Number'} hint="+919876543210">
+                  <FormField label={label(t, 'phone_number', 'Phone number')} hint="+919876543210">
                     <Input type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} placeholder="+919876543210" />
                   </FormField>
                 </>
@@ -109,10 +110,10 @@ const onPasswordLogin = async () => {
 
               <div className="space-y-2 pt-2">
                 <Button variant="outline" onClick={() => setMode(mode === 'password-email' ? 'password-phone' : 'password-email')}>
-                  {mode === 'password-email' ? (t('sign_in_with_phone') || 'Sign in with Phone') : (t('sign_in_with_email') || 'Sign in with Email')}
+                  {mode === 'password-email' ? (label(t, 'sign_in_with_phone', 'Sign in with phone')) : (label(t, 'sign_in_with_email', 'Sign in with email'))}
                 </Button>
                 <Button variant="ghost" onClick={() => setMode('otp')}>
-                  {t('sign_in_with_otp') || 'Sign in with Phone OTP'}
+                  {label(t, 'sign_in_with_otp', 'Sign in with phone otp')}
                 </Button>
               </div>
             </div>
@@ -121,7 +122,7 @@ const onPasswordLogin = async () => {
           {/* OTP flow */}
           {mode === 'otp' && (
             <div className="space-y-3">
-              <FormField label={t('phone_number') || 'Phone Number'} hint="+919876543210">
+              <FormField label={label(t, 'phone_number', 'Phone number')} hint="+919876543210">
                 <Input type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} placeholder="+919876543210" />
               </FormField>
               <div className="flex gap-2">
@@ -144,8 +145,8 @@ const onPasswordLogin = async () => {
 
           <div className="my-6 border-t" />
           <div className="text-sm text-gray-700">
-            <span>{t('not_registered') || 'Not registered yet?'}</span>{' '}
-            <a href="/auth/signup" className="text-brand hover:underline">{t('sign_up') || 'Sign Up'}</a>
+            <span>{label(t, 'not_registered', 'Not registered yet?')}</span>{' '}
+            <a href="/auth/signup" className="text-brand hover:underline">{label(t, 'sign_up', 'Sign up')}</a>
           </div>
 
           <div className="pt-4 border-t mt-6 text-sm text-gray-700">
