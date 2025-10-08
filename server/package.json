@@ -1,0 +1,79 @@
+{
+  "name": "krishi-mitra-server",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Krishi Mitra backend - Node/Express/Prisma monolith API",
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "scripts": {
+    "dev": "nodemon --config nodemon.json",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "start:prod": "NODE_ENV=production node dist/index.js",
+    "prisma:generate": "prisma generate --schema src/database/schema.prisma",
+    "prisma:migrate": "prisma migrate dev --schema src/database/schema.prisma",
+    "prisma:deploy": "prisma migrate deploy --schema src/database/schema.prisma",
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "format": "prettier --write .",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "typecheck": "tsc --noEmit",
+    "seed": "ts-node --transpile-only src/database/seeds/admin_seed.ts",
+    "seed:farms": "ts-node --transpile-only src/database/seeds/farms_seed.ts",
+    "debug:fallback": "ts-node --transpile-only src/scripts/debug_fallback.ts"
+  },
+  "dependencies": {
+    "@google/genai": "^1.21.0",
+    "@google/generative-ai": "^0.24.1",
+    "@prisma/client": "^5.9.1",
+    "bcryptjs": "^2.4.3",
+    "compression": "^1.8.1",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.11",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^8.1.0",
+    "helmet": "^7.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "pino": "^9.10.0",
+    "pino-http": "^10.5.0",
+    "pino-pretty": "^13.1.1",
+    "uuid": "^9.0.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/compression": "^1.8.1",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/morgan": "^1.9.10",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^20.11.30",
+    "@types/supertest": "^2.0.16",
+    "eslint": "^9.6.0",
+    "husky": "^9.0.11",
+    "jest": "^29.7.0",
+    "lint-staged": "^15.2.2",
+    "nodemon": "^3.0.3",
+    "prettier": "^3.2.5",
+    "prisma": "^5.9.1",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,json,md}": [
+      "prettier --write"
+    ],
+    "src/**/*.{ts,tsx}": [
+      "eslint --fix"
+    ]
+  }
+}

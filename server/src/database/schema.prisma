@@ -1,0 +1,204 @@
+// server/src/database/schema.prisma
+// Prisma schema for initial auth-related entities and future expansion.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  Int      @id @default(autoincrement())
+  phone_number        String   @unique
+  email               String?  @unique
+  password_hash       String?
+  name                String?
+  language_preference String   @default("en")
+  created_at          DateTime @default(now())
+
+  // Location fields
+  pin_code       String? @db.VarChar(6)
+  city           String?
+  state          String?
+  constituency   String?
+  gram_panchayat String?
+
+  // OTP fields
+  otp_code       String?
+  otp_expires_at DateTime?
+
+  // Relations
+  farms      Farm[]
+  alerts     Alert[]
+  grievances Grievance[]
+
+  @@index([pin_code])
+  @@index([city])
+  @@index([state])
+  @@index([constituency])
+}
+
+model Farm {
+  id                   Int      @id @default(autoincrement())
+  user_id              Int
+  farm_name            String?
+  // Area
+  area_acres           Decimal? @db.Decimal(6, 2)
+  area_unit            String   @default("acres")
+  // Location (textual)
+  village              String?
+  district             String?
+  state                String?
+  // Coordinates
+  location_lat         Decimal  @db.Decimal(9, 6)
+  location_lon         Decimal  @db.Decimal(9, 6)
+  // Soil & water basics
+  soil_type            String?
+  soil_ph              Decimal? @db.Decimal(4, 2)
+  organic_carbon       Decimal? @db.Decimal(5, 2)
+  n_level              Decimal? @db.Decimal(6, 2)
+  p_level              Decimal? @db.Decimal(6, 2)
+  k_level              Decimal? @db.Decimal(6, 2)
+  drainage_condition   String?
+  soil_test_report_url String?
+  irrigation_source    String?
+  irrigation_system    String?
+  water_availability   String?
+  // Crop history & patterns
+  previous_crops       Json?
+  rotation_pattern     String?
+  // Preferences & context
+  primary_goal         String?
+  challenges           String?
+  preferred_language   String?
+  photos               Json?
+  livestock            Json?
+  equipment            Json?
+
+  user       User         @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  cropCycles CropCycle[]
+  tasks      Task[]
+  metrics    FarmMetrics?
+
+  @@index([user_id])
+}
+
+model CropCycle {
+  id                    Int       @id @default(autoincrement())
+  farm_id               Int
+  crop_name             String
+  variety               String?
+  stage                 String? // pre-sowing | sowing | vegetative | flowering | harvesting
+  sowing_date           DateTime
+  expected_harvest_date DateTime?
+  seed_source           String?
+  status                String    @default("active")
+  created_at            DateTime  @default(now())
+
+  farm       Farm       @relation(fields: [farm_id], references: [id], onDelete: Cascade)
+  activities Activity[]
+}
+
+model Activity {
+  id            Int      @id @default(autoincrement())
+  crop_cycle_id Int
+  activity_type String
+  date          DateTime
+  notes         String?
+  data          Json?
+
+  cropCycle CropCycle @relation(fields: [crop_cycle_id], references: [id], onDelete: Cascade)
+}
+
+model Task {
+  id           Int       @id @default(autoincrement())
+  farm_id      Int
+  title        String
+  status       String    @default("pending") // 'pending' | 'done'
+  due_date     DateTime?
+  created_at   DateTime  @default(now())
+  completed_at DateTime?
+
+  farm Farm @relation(fields: [farm_id], references: [id], onDelete: Cascade)
+
+  @@index([farm_id])
+  @@index([status])
+}
+
+model FarmMetrics {
+  id                Int      @id @default(autoincrement())
+  farm_id           Int      @unique
+  yield_forecast    Int? // percent 0-100
+  pest_risk         String? // Low | Medium | High
+  water_requirement String? // Low | Medium | High
+  updated_at        DateTime @updatedAt
+
+  farm Farm @relation(fields: [farm_id], references: [id], onDelete: Cascade)
+}
+
+model AdvisoryRule {
+  id                 Int     @id @default(autoincrement())
+  crop_name          String?
+  trigger_event      String
+  conditions         Json
+  recommendation_key String
+  priority           Int     @default(0)
+}
+
+model Alert {
+  id           Int      @id @default(autoincrement())
+  user_id      Int
+  alert_type   String
+  content_key  String
+  content_text String?
+  is_read      Boolean  @default(false)
+  created_at   DateTime @default(now())
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model Admin {
+  id            Int      @id @default(autoincrement())
+  email         String   @unique
+  username      String?  @unique
+  name          String?
+  password_hash String
+  role          String   @default("admin")
+  created_at    DateTime @default(now())
+}
+
+model Scheme {
+  id                  Int       @id @default(autoincrement())
+  title               String
+  description         String?
+  eligibility         String?
+  link                String?
+  image_url           String?
+  // Optional targeting (if set, only relevant users should see)
+  target_state        String?
+  target_city         String?
+  target_constituency String?
+  start_date          DateTime?
+  end_date            DateTime?
+  active              Boolean   @default(true)
+  created_at          DateTime  @default(now())
+}
+
+model Grievance {
+  id          Int      @id @default(autoincrement())
+  user_id     Int
+  title       String
+  description String
+  category    String?
+  status      String   @default("open") // open|in_progress|resolved
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([user_id])
+  @@index([status])
+}

@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #212121;
+  --brand: #2E7D32;
+  --secondary: #1565C0;
+}
+
+.dark {
+  --background: #121212;
+  --foreground: #FAFAFA;
+  --brand: #66BB6A;
+  --card-bg: #1E1E1E;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Accessibility helpers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Dark mode compatibility overrides for legacy light-only classes */
+/* Ensures old bg-white, bg-gray-50, etc. render appropriately in dark mode without touching every file. */
+.dark .bg-white { background-color: #1E1E1E !important; }
+.dark .bg-gray-50 { background-color: #0f0f0f !important; }
+.dark .bg-gray-100 { background-color: #121212 !important; }
+.dark .bg-\[\#F1F5F9\] { background-color: #121212 !important; }
+.dark .bg-white\/90 { background-color: rgba(18,18,18,0.90) !important; }
+.dark .bg-white\/80 { background-color: rgba(18,18,18,0.80) !important; }
+.dark .bg-white\/70 { background-color: rgba(18,18,18,0.70) !important; }
+.dark .hover\:bg-gray-100:hover { background-color: #222 !important; }
+/* Border default */
+.dark .border { border-color: #2d2d2d !important; }
+/* Text defaults: gracefully lift gray-700 in dark */
+.dark .text-gray-700 { color: #e5e7eb !important; }
+.dark .text-gray-600 { color: #d1d5db !important; }
