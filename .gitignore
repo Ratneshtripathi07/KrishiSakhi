@@ -116,3 +116,7 @@ Desktop.ini
 
 # /client/.env.local
 client/.env.local
+
+*CONVERSATION.md
+*previous_conversation.txt
+*env.md
