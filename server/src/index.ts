@@ -10,7 +10,7 @@ if (process.env.DIRECT_URL) {
     console.log(`DIRECT_URL user: ${url.username}`);
     console.log(`DIRECT_URL password length: ${url.password.length}`);
     console.log(`DIRECT_URL path: ${url.pathname}`);
-  } catch (e) {
+  } catch (e: any) {
     console.log('Error parsing DIRECT_URL:', e.message);
     console.log('DIRECT_URL as a string:', process.env.DIRECT_URL);
   }
