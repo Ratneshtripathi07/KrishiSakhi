@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { analyzeImage, type AnalyzeImageOptions, type PestAnalysis } from '@/services/pestService';
 import { useI18n } from '@/lib/i18n';
 import VoiceButton from '@/components/voice/VoiceButton';
+import { label } from '@/lib/labels';
 import { useSpeak } from '@/lib/tts';
 import Input from '@/components/ui/input';
 import Textarea from '@/components/ui/textarea';
@@ -126,7 +127,7 @@ export default function PestDetectionPage() {
             <form onSubmit={onSubmit} className="space-y-5">
               {/* Crop */}
               <div>
-                <Label>{t('crop_optional')}</Label>
+                <Label>{label(t, 'crop_optional')}</Label>
                 <Input
                   value={crop}
                   onChange={(e) => setCrop(e.target.value)}
@@ -137,7 +138,7 @@ export default function PestDetectionPage() {
 
               {/* File upload */}
               <div>
-                <Label>{t('photo_label')}</Label>
+                <Label>{label(t, 'photo_label')}</Label>
                 {!previewUrl ? (
                   <div
                     className={`mt-2 border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-colors ${dragActive ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20' : 'border-gray-300 dark:border-gray-700 hover:border-emerald-500 dark:hover:border-emerald-400'}`}
@@ -190,7 +191,7 @@ export default function PestDetectionPage() {
 
               {/* Notes */}
               <div>
-                <Label>{t('notes_optional')}</Label>
+                <Label>{label(t, 'notes_optional')}</Label>
                 <div className="mt-1 flex items-start gap-2">
                   <div className="relative flex-1">
                     <Textarea
@@ -210,7 +211,7 @@ export default function PestDetectionPage() {
               </div>
 
               <div className="text-sm text-gray-600 dark:text-gray-400">
-                {t('location')}: {coords.lat?.toFixed(4) || '—'}, {coords.lon?.toFixed(4) || '—'}
+                {label(t, 'location')}: {coords.lat?.toFixed(4) || '—'}, {coords.lon?.toFixed(4) || '—'}
               </div>
 
               <Button disabled={loading || !file} className="w-full rounded-xl bg-emerald-600 hover:bg-emerald-700">
@@ -258,7 +259,7 @@ export default function PestDetectionPage() {
                 )}
                 {result.likely_causes && result.likely_causes.length > 0 && (
                   <div>
-                    <p className="font-medium">{t('likely_causes') || 'Likely Causes'}</p>
+                    <p className="font-medium">{label(t, 'likely_causes', 'Likely causes')}</p>
                     <ul className="list-disc pl-6 text-sm text-gray-700 dark:text-gray-300">
                       {result.likely_causes.map((c, idx) => (
                         <li key={idx}>{c}</li>
@@ -268,7 +269,7 @@ export default function PestDetectionPage() {
                 )}
                 {result.recommended_actions && result.recommended_actions.length > 0 && (
                   <div>
-                    <p className="font-medium">{t('recommended_actions') || 'Recommended Actions'}</p>
+                    <p className="font-medium">{label(t, 'recommended_actions', 'Recommended actions')}</p>
                     <ul className="list-disc pl-6 text-sm text-gray-700 dark:text-gray-300">
                       {result.recommended_actions.map((a, idx) => (
                         <li key={idx}>{a}</li>
@@ -278,7 +279,7 @@ export default function PestDetectionPage() {
                 )}
                 {result.caution && result.caution.length > 0 && (
                   <div>
-                    <p className="font-medium">{t('advisories')}</p>
+                    <p className="font-medium">{label(t, 'advisories')}</p>
                     <ul className="list-disc pl-6 text-sm text-gray-700 dark:text-gray-300">
                       {result.caution.map((a, idx) => (
                         <li key={idx}>{a}</li>

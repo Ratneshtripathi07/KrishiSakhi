@@ -8,6 +8,7 @@ import { BellRing } from 'lucide-react';
 import { useFormat } from '@/lib/format';
 import EmptyState from '@/components/ui/empty-state';
 import { Bell } from 'lucide-react';
+import { prettifyKey } from '@/lib/labels';
 
 export default function AlertsPage() {
   const { t } = useI18n();
@@ -58,8 +59,8 @@ export default function AlertsPage() {
             {alerts.map((a, idx) => (
               <div key={idx} className={`rounded-2xl border p-4 shadow-sm hover:shadow transition-all ${idx % 3 === 0 ? 'bg-amber-100' : idx % 3 === 1 ? 'bg-sky-100' : 'bg-emerald-100'}`}>
                 <div className="text-xs text-gray-700">{formatDate(a.created_at)}</div>
-                <div className="text-lg font-semibold">{a.alert_type}</div>
-                <div className="text-base text-gray-900">{a.content_text || a.content_key}</div>
+                <div className="text-lg font-semibold">{prettifyKey(a.alert_type)}</div>
+                <div className="text-base text-gray-900">{a.content_text || prettifyKey(a.content_key)}</div>
               </div>
             ))}
           </div>

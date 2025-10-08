@@ -6,6 +6,7 @@ import { getFarms, getFarmDetails, updateTaskStatus, updateFarm, uploadFarmPhoto
 import { api, TOKEN_KEY } from '@/services/api';
 import Button from '@/components/ui/button';
 import { Plus, Edit3, Droplets } from 'lucide-react';
+import { prettifyKey } from '@/lib/labels';
 
 function Pill({ children }: { children: React.ReactNode }) {
   return <div className="rounded-full bg-[#FFD600] text-black text-xs px-3 py-1 font-medium shadow-sm">{children}</div>;
@@ -127,7 +128,7 @@ export default function FarmsPage() {
             <button key={f.id} onClick={() => setActiveId(f.id)} className={`shrink-0 rounded-2xl bg-white shadow-sm border p-4 min-w-[200px] text-left hover:shadow transition-all ${activeId === f.id ? 'ring-2 ring-[#2E7D32]' : ''}`}>
               <div className="flex items-center justify-between mb-1">
                 <div className="text-base font-semibold">{f.name || `Farm ${f.id}`}</div>
-                <Pill>{f.status}</Pill>
+                <Pill>{prettifyKey(f.status)}</Pill>
               </div>
               <div className="text-sm text-gray-600">{f.crop || '—'} • {f.area_acres != null ? `${f.area_acres} acres` : '—'}</div>
             </button>
@@ -154,7 +155,7 @@ export default function FarmsPage() {
               </div>
               <div className="rounded-xl border p-3">
                 <div className="text-sm text-gray-500">{t('status') || 'Status'}</div>
-                <div className="font-medium">{details.farm.status}</div>
+                <div className="font-medium">{prettifyKey(details.farm.status)}</div>
               </div>
             </div>
 

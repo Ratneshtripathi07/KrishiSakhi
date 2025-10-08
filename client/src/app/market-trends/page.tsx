@@ -5,6 +5,7 @@ import { listCrops, fetchTrends, type MarketPoint } from '@/services/marketServi
 import { fetchStates, fetchCities } from '@/services/locationService';
 import { useI18n } from '@/lib/i18n';
 import { useFormat } from '@/lib/format';
+import { label } from '@/lib/labels';
 import { Line } from 'react-chartjs-2';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import Select from '@/components/ui/select';
@@ -123,10 +124,10 @@ export default function MarketTrendsPage() {
   return (
     <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-[#F1F5F9]">
       <div className="mx-auto max-w-6xl px-4 py-6 space-y-6">
-      <h1 className="text-3xl font-semibold tracking-tight">{t('market_trends') || 'Market Trends'}</h1>
+      <h1 className="text-3xl font-semibold tracking-tight">{label(t, 'market_trends')}</h1>
       <Card>
         <CardHeader>
-          <CardHeaderTitle icon={<SlidersHorizontal className="w-5 h-5 text-emerald-700" />} title={t('market_trends') || 'Market Trends'} />
+          <CardHeaderTitle icon={<SlidersHorizontal className="w-5 h-5 text-emerald-700" />} title={label(t, 'market_trends')} />
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-3 items-end">
@@ -174,13 +175,13 @@ export default function MarketTrendsPage() {
           <CardHeader>
             <div className="flex items-center gap-2">
               <LineChart className="w-5 h-5 text-emerald-700" />
-              <CardTitle>{t('market_trends') || 'Market Trends'}</CardTitle>
+              <CardTitle>{label(t, 'market_trends')}</CardTitle>
             </div>
           </CardHeader>
           <CardContent>
             <div className="rounded-2xl bg-sky-100 p-3 mb-3">
               <div className="flex items-center justify-between">
-                <div className="text-base font-medium text-gray-800">{t('market_trends') || 'Market Trends'} - {crop}</div>
+                <div className="text-base font-medium text-gray-800">{label(t, 'market_trends')} - {crop}</div>
                 <IconButton aria-label={t('speak') || 'Speak'} title={t('speak') || 'Speak'} onClick={() => { try { const last = series[series.length-1]; if (last) speak(`Average price today is rupees ${Math.round(last.avgPrice)}. Minimum ${Math.round(last.minPrice)}, maximum ${Math.round(last.maxPrice)}.`); } catch {} }}>
                   <Volume2 className="w-4 h-4" aria-hidden="true" />
                 </IconButton>

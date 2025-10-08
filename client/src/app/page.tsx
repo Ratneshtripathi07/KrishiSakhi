@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { useI18n } from '@/lib/i18n';
+import { label } from '@/lib/labels';
 import Image from 'next/image';
 import Button from '@/components/ui/button';
 import { Cloud, Bug, LineChart, MessageSquare, LogIn, ShieldCheck, ChevronLeft, ChevronRight, ArrowUpRight, ArrowDownRight, Minus } from 'lucide-react';
@@ -158,7 +159,7 @@ export default function Page() {
               <div className="flex items-start gap-4 h-full">
                 <Bug className="w-9 h-9 text-emerald-700" />
                 <div className="flex-1 flex flex-col min-w-0">
-                  <h3 className="text-lg font-semibold truncate" title={t('pest_check') || 'Pest Check'}>{t('pest_check') || 'Pest Check'}</h3>
+<h3 className="text-lg font-semibold truncate" title={label(t, 'pest_check')}>{label(t, 'pest_check')}</h3>
                   <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">{t('analyze_title') || 'Analyze crop image for issues'}</p>
                   <div className="mt-auto pt-3">
                     <Button href="/pest-detection" variant="outline" size="sm" className="w-max">{t('analyze_button') || 'Analyse Image'}</Button>
@@ -172,7 +173,7 @@ export default function Page() {
               <div className="flex items-start gap-4">
                 <LineChart className="w-9 h-9 text-emerald-700" />
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold">{t('market_trends') || 'Market Trends'}</h3>
+<h3 className="text-lg font-semibold">{label(t, 'market_trends')}</h3>
                   <div className="mt-1 text-sm text-gray-700 dark:text-gray-300 flex items-center gap-2">
                     <span>Rice:</span>
                     <span className="font-medium">{Number.isFinite(price?.curr) ? `${Math.round(price!.curr!)} ₹` : '—'}</span>
@@ -192,7 +193,7 @@ export default function Page() {
               <div className="flex items-start gap-4">
                 <MessageSquare className="w-9 h-9 text-emerald-700" />
                 <div>
-                  <h3 className="text-lg font-semibold">{t('ask_question') || 'Ask Question'}</h3>
+<h3 className="text-lg font-semibold">{label(t, 'ask_question')}</h3>
                   <p className="text-sm text-gray-700 dark:text-gray-300">Get simple answers and advisories.</p>
                 </div>
               </div>
@@ -203,7 +204,7 @@ export default function Page() {
               <div className="flex items-start gap-4">
                 <LogIn className="w-9 h-9 text-emerald-700" />
                 <div>
-                  <h3 className="text-lg font-semibold">{t('get_started') || 'Get Started'}</h3>
+<h3 className="text-lg font-semibold">{label(t, 'get_started')}</h3>
                   <p className="text-sm text-gray-700 dark:text-gray-300">Access your dashboard and personalized advisories.</p>
                 </div>
               </div>

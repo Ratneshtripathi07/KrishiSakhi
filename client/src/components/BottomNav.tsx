@@ -4,6 +4,7 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import { Home, Bug, LineChart, MessageSquare } from "lucide-react";
 import { useI18n } from '@/lib/i18n';
+import { label } from '@/lib/labels';
 
 function NavItem({ href, icon, label, active }: { href: string; icon: React.ReactNode; label: string; active: boolean }) {
   return (
@@ -21,9 +22,9 @@ export default function BottomNav() {
     <nav className="fixed bottom-0 left-0 right-0 border-t bg-white/90 dark:bg-[#121212] backdrop-blur md:hidden">
       <div className="mx-auto max-w-3xl grid grid-cols-4">
         <NavItem href="/" icon={<Home className="w-6 h-6" />} label={t('home') || 'Home'} active={pathname === '/'} />
-        <NavItem href="/pest-detection" icon={<Bug className="w-6 h-6" />} label={t('pest_check') || 'Pest Check'} active={pathname.startsWith('/pest-detection')} />
-        <NavItem href="/market-trends" icon={<LineChart className="w-6 h-6" />} label={t('market_trends') || 'Market'} active={pathname.startsWith('/market-trends')} />
-        <NavItem href="/chat" icon={<MessageSquare className="w-6 h-6" />} label={t('ask') || t('ask_question') || 'Ask'} active={pathname.startsWith('/chat')} />
+<NavItem href="/pest-detection" icon={<Bug className="w-6 h-6" />} label={label(t, 'pest_check')} active={pathname.startsWith('/pest-detection')} />
+<NavItem href="/market-trends" icon={<LineChart className="w-6 h-6" />} label={label(t, 'market_trends')} active={pathname.startsWith('/market-trends')} />
+<NavItem href="/chat" icon={<MessageSquare className="w-6 h-6" />} label={label(t, 'ask_question')} active={pathname.startsWith('/chat')} />
       </div>
     </nav>
   );

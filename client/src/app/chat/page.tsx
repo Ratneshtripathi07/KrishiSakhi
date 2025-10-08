@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { ask } from '@/services/chatService';
 import { useI18n } from '@/lib/i18n';
+import { label } from '@/lib/labels';
 import VoiceButton from '@/components/voice/VoiceButton';
 import Input from '@/components/ui/input';
 import Button from '@/components/ui/button';
@@ -34,7 +35,7 @@ export default function ChatPage() {
   const doAsk = async (q: string) => {
     setError(null);
     const msg = (q || '').trim();
-    if (!msg) { setError(t('ask_question')); return; }
+    if (!msg) { setError(label(t, 'ask_question')); return; }
     if (loading || sendingRef.current) return; // guard against duplicate triggers
     const norm = msg.replace(/\s+/g, ' ').toLowerCase();
     const now = Date.now();
@@ -127,7 +128,7 @@ export default function ChatPage() {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 onKeyDown={onKeyDown}
-                placeholder={t('ask_question') || 'Type your message…'}
+                placeholder={label(t, 'ask_question')}
                 className="flex-1 rounded-2xl px-4 py-2"
               />
               <Button disabled={loading || !text.trim()} className="rounded-2xl px-4">

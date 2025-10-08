@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { adminListGrievances, adminUpdateGrievance } from '@/services/grievancesService';
+import { prettifyKey } from '@/lib/labels';
 
 export default function AdminGrievancesPage() {
   const [list, setList] = useState<any[]>([]);
@@ -27,9 +28,9 @@ export default function AdminGrievancesPage() {
               <div className="flex items-center justify-between">
                 <div className="text-lg font-semibold">{g.title}</div>
                 <select className="rounded-md border px-2 py-1 text-sm" value={g.status} onChange={(e) => update(g.id, e.target.value as any)}>
-                  <option value="open">open</option>
-                  <option value="in_progress">in_progress</option>
-                  <option value="resolved">resolved</option>
+                  <option value="open">{prettifyKey('open')}</option>
+                  <option value="in_progress">{prettifyKey('in_progress')}</option>
+                  <option value="resolved">{prettifyKey('resolved')}</option>
                 </select>
               </div>
               <div className="text-sm text-gray-700 mt-1">{g.description}</div>

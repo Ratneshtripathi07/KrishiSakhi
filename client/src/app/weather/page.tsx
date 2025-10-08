@@ -15,6 +15,7 @@ import IconButton from '@/components/ui/icon-button';
 import { Volume2 } from 'lucide-react';
 import { Cloud, AlertTriangle, Clock, CalendarDays } from 'lucide-react';
 import CardHeaderTitle from '@/components/ui/card-header-title';
+import { label } from '@/lib/labels';
 
 function useGeolocation() {
   const [pos, setPos] = useState<{ lat?: number; lon?: number }>({});
@@ -114,7 +115,7 @@ export default function WeatherPage() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
-      <h1 className="text-2xl font-semibold tracking-tight">{t('weather')} & {t('advisories')}</h1>
+      <h1 className="text-2xl font-semibold tracking-tight">{label(t, 'weather')} & {label(t, 'advisories')}</h1>
       <p className="text-gray-600 text-sm">{t('complete_profile_weather')}</p>
 
       {!canGeo && (
@@ -138,7 +139,7 @@ export default function WeatherPage() {
             </Select>
           </div>
           <div className="flex items-center gap-2">
-            <Button onClick={load}>{t('weather')}</Button>
+            <Button onClick={load}>{label(t, 'weather')}</Button>
             <VoiceButton onTranscript={async () => { await load(); setTimeout(() => { const lines = advisories.map((a) => a.text); if (lines.length) speakLines(lines); }, 150); }} title={t('voice') || 'Voice'} />
           </div>
         </div>
@@ -172,7 +173,7 @@ export default function WeatherPage() {
                 <ul className="space-y-2 text-sm text-gray-800">
                   {advisories.map((a, i) => (
                     <li key={a.key || i} className="flex items-start gap-2">
-                      <Badge variant={a.severity === 'critical' ? 'critical' : a.severity === 'warning' ? 'warning' : 'info'}>{t(`severity_${a.severity}`)}</Badge>
+                      <Badge variant={a.severity === 'critical' ? 'critical' : a.severity === 'warning' ? 'warning' : 'info'}>{label(t, `severity_${a.severity}`, a.severity.replace(/_/g, ' '))}</Badge>
                       <span>{(t(`advisory_${a.key}`) !== `advisory_${a.key}`) ? t(`advisory_${a.key}`) : a.text}</span>
                     </li>
                   ))}

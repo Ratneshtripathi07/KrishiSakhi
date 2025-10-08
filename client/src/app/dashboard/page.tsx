@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { TOKEN_KEY } from '@/services/api';
 import { useFormat } from '@/lib/format';
 import { useI18n } from '@/lib/i18n';
+import { label } from '@/lib/labels';
 import Button from '@/components/ui/button';
 import { api } from '@/services/api';
 import { Cloud, Bell, Home, Leaf, LineChart, Bug, MessageSquare, BookOpen, ShoppingCart, Users, AlertCircle, User as UserIcon, ChevronLeft, ChevronRight, ArrowUpRight, ArrowDownRight, Minus, Cpu } from 'lucide-react';
@@ -356,7 +357,7 @@ export default function DashboardPage() {
                 <div className="text-sm text-gray-800">{timeline[0].text}</div>
               )}
               <div className="mt-3 text-right">
-                <a href="/chat" className="text-sm text-emerald-700 hover:underline">{t('ask_question') || 'Ask a question'}</a>
+<a href="/chat" className="text-sm text-emerald-700 hover:underline">{label(t, 'ask_question')}</a>
               </div>
             </CardWrap>
 
@@ -468,9 +469,9 @@ export default function DashboardPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             <Button href="/submit" variant="outline" className="rounded-xl shadow-sm hover:shadow">{t('update_profile') || 'Update Profile'}</Button>
             <Button href="/weather" variant="outline" className="rounded-xl shadow-sm hover:shadow">{t('open_weather') || 'Open Weather'}</Button>
-            <Button href="/pest-detection" variant="outline" className="rounded-xl shadow-sm hover:shadow">{t('pest_check') || 'Pest Check'}</Button>
-            <Button href="/market-trends" variant="outline" className="rounded-xl shadow-sm hover:shadow">{t('market_trends') || 'Market'}</Button>
-            <Button href="/chat" variant="outline" className="rounded-xl shadow-sm hover:shadow">{t('ask_question') || 'Ask Question'}</Button>
+<Button href="/pest-detection" variant="outline" className="rounded-xl shadow-sm hover:shadow">{label(t, 'pest_check')}</Button>
+<Button href="/market-trends" variant="outline" className="rounded-xl shadow-sm hover:shadow">{label(t, 'market_trends')}</Button>
+<Button href="/chat" variant="outline" className="rounded-xl shadow-sm hover:shadow">{label(t, 'ask_question')}</Button>
             <Button href="/feedback" variant="outline" className="rounded-xl shadow-sm hover:shadow">{t('feedback') || 'Feedback'}</Button>
           </div>
         </main>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { createGrievance, listMyGrievances, type Grievance } from '@/services/grievancesService';
 import Button from '@/components/ui/button';
+import { prettifyKey } from '@/lib/labels';
 
 export default function GrievancesPage() {
   const [title, setTitle] = useState('');
@@ -59,7 +60,7 @@ export default function GrievancesPage() {
               <div key={g.id} className={`rounded-xl border p-3 ${g.status === 'resolved' ? 'bg-emerald-50' : g.status === 'in_progress' ? 'bg-amber-50' : 'bg-sky-50'}`}>
                 <div className="font-semibold">{g.title}</div>
                 <div className="text-sm text-gray-700 mt-1">{g.description}</div>
-                <div className="text-xs text-gray-600 mt-1">Status: {g.status}</div>
+                <div className="text-xs text-gray-600 mt-1">Status: {prettifyKey(g.status)}</div>
               </div>
             ))}
           </div>
