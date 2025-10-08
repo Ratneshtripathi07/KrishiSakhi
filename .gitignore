@@ -120,3 +120,4 @@ client/.env.local
 *CONVERSATION.md
 *previous_conversation.txt
 *env.md
+/files changed by gemini cli
