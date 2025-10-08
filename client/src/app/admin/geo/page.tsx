@@ -8,6 +8,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Map, BarChart3, PieChart } from 'lucide-react';
 import { useI18n } from '@/lib/i18n';
 import Button from '@/components/ui/button';
+import { label } from '@/lib/labels';
 import Select from '@/components/ui/select';
 import Label from '@/components/ui/label';
 import CardHeaderTitle from '@/components/ui/card-header-title';
@@ -120,7 +121,7 @@ export default function AdminGeoAnalyticsPage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
-      <h1 className="text-2xl font-semibold tracking-tight">{t('geo_analytics') || 'Geo Analytics'}</h1>
+      <h1 className="text-2xl font-semibold tracking-tight">{label(t, 'geo_analytics', 'Geo analytics')}</h1>
 
       <Card>
         <CardHeader>
