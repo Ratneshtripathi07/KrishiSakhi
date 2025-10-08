@@ -1,4 +1,4 @@
-# Krishi Mitra
+# Krishi Sakhi
 
 AI-powered personal crop companion focused on farmer usability, offline-first access (PWA), and multilingual support. This monorepo contains a Next.js 14 client and an Express/Prisma API server with PostgreSQL.
 
