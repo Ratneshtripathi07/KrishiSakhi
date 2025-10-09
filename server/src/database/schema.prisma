@@ -1,6 +1,3 @@
-// server/src/database/schema.prisma
-// Prisma schema for initial auth-related entities and future expansion.
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -12,29 +9,23 @@ datasource db {
 }
 
 model User {
-  id                  Int      @id @default(autoincrement())
-  phone_number        String   @unique
-  email               String?  @unique
-  password_hash       String?
+  id                  Int         @id @default(autoincrement())
+  phone_number        String      @unique
   name                String?
-  language_preference String   @default("en")
-  created_at          DateTime @default(now())
-
-  // Location fields
-  pin_code       String? @db.VarChar(6)
-  city           String?
-  state          String?
-  constituency   String?
-  gram_panchayat String?
-
-  // OTP fields
-  otp_code       String?
-  otp_expires_at DateTime?
-
-  // Relations
-  farms      Farm[]
-  alerts     Alert[]
-  grievances Grievance[]
+  language_preference String      @default("en")
+  created_at          DateTime    @default(now())
+  otp_code            String?
+  otp_expires_at      DateTime?
+  city                String?
+  constituency        String?
+  gram_panchayat      String?
+  pin_code            String?     @db.VarChar(6)
+  state               String?
+  email               String?     @unique
+  password_hash       String?
+  alerts              Alert[]
+  farms               Farm[]
+  grievances          Grievance[]
 
   @@index([pin_code])
   @@index([city])
@@ -43,87 +34,77 @@ model User {
 }
 
 model Farm {
-  id                   Int      @id @default(autoincrement())
+  id                   Int          @id @default(autoincrement())
   user_id              Int
   farm_name            String?
-  // Area
-  area_acres           Decimal? @db.Decimal(6, 2)
-  area_unit            String   @default("acres")
-  // Location (textual)
-  village              String?
-  district             String?
-  state                String?
-  // Coordinates
-  location_lat         Decimal  @db.Decimal(9, 6)
-  location_lon         Decimal  @db.Decimal(9, 6)
-  // Soil & water basics
+  location_lat         Decimal      @db.Decimal(9, 6)
+  location_lon         Decimal      @db.Decimal(9, 6)
   soil_type            String?
-  soil_ph              Decimal? @db.Decimal(4, 2)
-  organic_carbon       Decimal? @db.Decimal(5, 2)
-  n_level              Decimal? @db.Decimal(6, 2)
-  p_level              Decimal? @db.Decimal(6, 2)
-  k_level              Decimal? @db.Decimal(6, 2)
-  drainage_condition   String?
-  soil_test_report_url String?
   irrigation_source    String?
-  irrigation_system    String?
-  water_availability   String?
-  // Crop history & patterns
-  previous_crops       Json?
-  rotation_pattern     String?
-  // Preferences & context
-  primary_goal         String?
+  area_acres           Decimal?     @db.Decimal(6, 2)
+  area_unit            String       @default("acres")
   challenges           String?
-  preferred_language   String?
-  photos               Json?
-  livestock            Json?
+  district             String?
+  drainage_condition   String?
   equipment            Json?
-
-  user       User         @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  cropCycles CropCycle[]
-  tasks      Task[]
-  metrics    FarmMetrics?
+  irrigation_system    String?
+  k_level              Decimal?     @db.Decimal(6, 2)
+  livestock            Json?
+  n_level              Decimal?     @db.Decimal(6, 2)
+  organic_carbon       Decimal?     @db.Decimal(5, 2)
+  p_level              Decimal?     @db.Decimal(6, 2)
+  photos               Json?
+  preferred_language   String?
+  previous_crops       Json?
+  primary_goal         String?
+  rotation_pattern     String?
+  soil_ph              Decimal?     @db.Decimal(4, 2)
+  soil_test_report_url String?
+  state                String?
+  village              String?
+  water_availability   String?
+  cropCycles           CropCycle[]
+  user                 User         @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  metrics              FarmMetrics?
+  tasks                Task[]
 
   @@index([user_id])
 }
 
 model CropCycle {
-  id                    Int       @id @default(autoincrement())
+  id                    Int        @id @default(autoincrement())
   farm_id               Int
   crop_name             String
-  variety               String?
-  stage                 String? // pre-sowing | sowing | vegetative | flowering | harvesting
   sowing_date           DateTime
   expected_harvest_date DateTime?
+  status                String     @default("active")
+  created_at            DateTime   @default(now())
   seed_source           String?
-  status                String    @default("active")
-  created_at            DateTime  @default(now())
-
-  farm       Farm       @relation(fields: [farm_id], references: [id], onDelete: Cascade)
-  activities Activity[]
+  stage                 String?
+  variety               String?
+  activities            Activity[]
+  farm                  Farm       @relation(fields: [farm_id], references: [id], onDelete: Cascade)
 }
 
 model Activity {
-  id            Int      @id @default(autoincrement())
+  id            Int       @id @default(autoincrement())
   crop_cycle_id Int
   activity_type String
   date          DateTime
   notes         String?
   data          Json?
-
-  cropCycle CropCycle @relation(fields: [crop_cycle_id], references: [id], onDelete: Cascade)
+  cropCycle     CropCycle @relation(fields: [crop_cycle_id], references: [id], onDelete: Cascade)
 }
 
 model Task {
   id           Int       @id @default(autoincrement())
   farm_id      Int
   title        String
-  status       String    @default("pending") // 'pending' | 'done'
+  status       String    @default("pending")
   due_date     DateTime?
   created_at   DateTime  @default(now())
   completed_at DateTime?
-
-  farm Farm @relation(fields: [farm_id], references: [id], onDelete: Cascade)
+  farm         Farm      @relation(fields: [farm_id], references: [id], onDelete: Cascade)
 
   @@index([farm_id])
   @@index([status])
@@ -132,12 +113,11 @@ model Task {
 model FarmMetrics {
   id                Int      @id @default(autoincrement())
   farm_id           Int      @unique
-  yield_forecast    Int? // percent 0-100
-  pest_risk         String? // Low | Medium | High
-  water_requirement String? // Low | Medium | High
+  yield_forecast    Int?
+  pest_risk         String?
+  water_requirement String?
   updated_at        DateTime @updatedAt
-
-  farm Farm @relation(fields: [farm_id], references: [id], onDelete: Cascade)
+  farm              Farm     @relation(fields: [farm_id], references: [id], onDelete: Cascade)
 }
 
 model AdvisoryRule {
@@ -154,21 +134,20 @@ model Alert {
   user_id      Int
   alert_type   String
   content_key  String
-  content_text String?
   is_read      Boolean  @default(false)
   created_at   DateTime @default(now())
-
-  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  content_text String?
+  user         User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 model Admin {
   id            Int      @id @default(autoincrement())
   email         String   @unique
-  username      String?  @unique
   name          String?
   password_hash String
   role          String   @default("admin")
   created_at    DateTime @default(now())
+  username      String?  @unique
 }
 
 model Scheme {
@@ -177,15 +156,14 @@ model Scheme {
   description         String?
   eligibility         String?
   link                String?
-  image_url           String?
-  // Optional targeting (if set, only relevant users should see)
-  target_state        String?
-  target_city         String?
-  target_constituency String?
   start_date          DateTime?
   end_date            DateTime?
   active              Boolean   @default(true)
   created_at          DateTime  @default(now())
+  image_url           String?
+  target_city         String?
+  target_constituency String?
+  target_state        String?
 }
 
 model Grievance {
@@ -194,11 +172,10 @@ model Grievance {
   title       String
   description String
   category    String?
-  status      String   @default("open") // open|in_progress|resolved
+  status      String   @default("open")
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
-
-  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@index([user_id])
   @@index([status])

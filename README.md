@@ -6,6 +6,36 @@ AI-powered personal crop companion focused on farmer usability, offline-first ac
 - Backend: Node.js ≥18, Express 4, Prisma ORM, PostgreSQL, JWT (pino/helmet/cors/rate limits)
 - Integrations: Open‑Meteo (weather, no key), optional LLM (Gemini via Google Gen AI), optional Twilio for SMS/OTP, optional data.gov.in pincode
 
+## UI Screenshots
+
+### Landing Pages
+![Landing Page Light](Assets/Landing_page-light.png)
+*Landing page with light theme*
+
+![Landing Page Dark](Assets/Landing_page_dark.png)
+*Landing page with dark theme*
+
+![Farmer Landing Page Dark](Assets/Farmer_Landing_page-dark.png)
+*Farmer-specific landing page with dark theme*
+
+### Authentication
+![Login Page](Assets/login_page.png)
+*User login interface*
+
+![Admin Login](Assets/Admin_Login.png)
+*Admin login interface*
+
+### Admin Dashboard
+![Admin Dashboard](Assets/Admin_Dashboard.png)
+*Admin dashboard with analytics and management tools*
+
+![Admin Schemes](Assets/Admin_schemes.png)
+*Admin scheme management interface*
+
+### Analytics
+![Geo Analytics](Assets/Geo_analytics.png)
+*Geographic analytics and data visualization*
+
 
 ## Repository structure
 
@@ -253,10 +283,4 @@ NODE_ENV=production PORT=4000 node dist/index.js
 - Chat/Pest 503: requires valid GEN_AI_API_KEY (Gemini supported)
 
 
-## Roadmap & docs
-
-- Feature backlog and PWA polish: FEATURE_BACKLOG_PWA.md
-- Additional features and priorities: ADDITIONAL_FEATURES.md
-- Hardware integration rationale and future ingestion: HARDWARE_INTEGRATION.md
-- Milestones and testing guidance: MILESTONES.md, TESTING.md
 
