@@ -216,8 +216,21 @@ const allowedOrigins = (env.CORS_ORIGIN || '*')
   .map((o) => o.trim())
   .filter(Boolean);
 
+const allowedOrigins = (env.CORS_ORIGIN || '')
+  .split(',')
+  .map((o) => o.trim())
+  .filter(Boolean);
+
 const corsOptions: CorsOptions = {
-  origin: true,
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes('*') && env.NODE_ENV !== 'production') return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    if (env.NODE_ENV !== 'production' && typeof origin === 'string' && /\.ngrok(-free)?\.app$/i.test(new URL(origin).host)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
 };
 app.use(cors(corsOptions));
