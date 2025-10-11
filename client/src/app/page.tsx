@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Button from '@/components/ui/button';
 import { Cloud, Bug, LineChart, MessageSquare, LogIn, ShieldCheck, ChevronLeft, ChevronRight, ArrowUpRight, ArrowDownRight, Minus } from 'lucide-react';
 import Footer from '@/components/Footer';
+import { api } from '@/services/api';
 
 // Full-bleed helper: make a section span the full viewport width even inside a centered layout
 function FullBleed({ children }: { children: ReactNode }) {
@@ -78,26 +79,25 @@ export default function Page() {
   useEffect(() => {
     const load = async () => {
       try {
-        let url = '/api/weather';
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(
             async (p) => {
               try {
-                const r = await fetch(`${url}?lat=${p.coords.latitude}&lon=${p.coords.longitude}`);
-                if (r.ok) setWeather(await r.json());
+                const r = await api.get('/weather', { params: { lat: p.coords.latitude, lon: p.coords.longitude } });
+                setWeather(r.data);
               } catch {}
             },
             async () => {
               try {
-                const r = await fetch(`${url}?state=KERALA&city=KANNUR`);
-                if (r.ok) setWeather(await r.json());
+                const r = await api.get('/weather', { params: { state: 'KERALA', city: 'KANNUR' } });
+                setWeather(r.data);
               } catch {}
             },
             { enableHighAccuracy: true, maximumAge: 60_000 }
           );
         } else {
-          const r = await fetch(`${url}?state=KERALA&city=KANNUR`);
-          if (r.ok) setWeather(await r.json());
+          const r = await api.get('/weather', { params: { state: 'KERALA', city: 'KANNUR' } });
+          setWeather(r.data);
         }
       } catch {}
     };
@@ -109,9 +109,8 @@ export default function Page() {
   useEffect(() => {
     const load = async () => {
       try {
-        const res = await fetch(`/api/market/trends?crop=${encodeURIComponent('Rice')}&state=KERALA&city=KANNUR`);
-        if (!res.ok) return;
-        const j = await res.json();
+        const res = await api.get('/market/trends', { params: { crop: 'Rice', state: 'KERALA', city: 'KANNUR' } });
+        const j = res.data;
         const pts = Array.isArray(j.points) ? j.points : [];
         const last = pts[pts.length - 1];
         const prev = pts[pts.length - 2];
