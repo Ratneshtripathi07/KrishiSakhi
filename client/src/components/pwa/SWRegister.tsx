@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 export default function SWRegister() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    if ('serviceWorker' in navigator) {
+    if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
       const register = async () => {
         try {
           const reg = await navigator.serviceWorker.register('/sw.js');
