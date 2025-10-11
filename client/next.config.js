@@ -4,6 +4,7 @@ const withPWA = require('next-pwa')({
   skipWaiting: true,
   clientsClaim: true,
   cleanupOutdatedCaches: true,
+  cacheStartUrl: false,
   disable: process.env.NODE_ENV === 'development',
   fallbacks: {
     document: '/offline'
