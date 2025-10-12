@@ -1,1 +1,4 @@
-Currently being deployed with bug fixes, stable uptill now
+1. Currently being deployed with bug fixes, stable uptill now
+
+2. deployed successfully and stable. 
+issues as of now: API integrations not smooth with render. tweaks after this commit.
