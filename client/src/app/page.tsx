@@ -89,14 +89,14 @@ export default function Page() {
             },
             async () => {
               try {
-                const r = await api.get('/weather', { params: { state: 'KERALA', city: 'KANNUR' } });
+                const r = await api.get('/weather', { params: { state: 'UTTAR PRADESH', city: 'LUCKNOW' } });
                 setWeather(r.data);
               } catch {}
             },
             { enableHighAccuracy: true, maximumAge: 60_000 }
           );
         } else {
-          const r = await api.get('/weather', { params: { state: 'KERALA', city: 'KANNUR' } });
+          const r = await api.get('/weather', { params: { state: 'UTTAR PRADESH', city: 'LUCKNOW' } });
           setWeather(r.data);
         }
       } catch {}
@@ -109,7 +109,7 @@ export default function Page() {
   useEffect(() => {
     const load = async () => {
       try {
-        const res = await api.get('/market/trends', { params: { crop: 'Rice', state: 'KERALA', city: 'KANNUR' } });
+        const res = await api.get('/market/trends', { params: { crop: 'Rice', state: 'UTTAR PRADESH', city: 'LUCKNOW' } });
         const j = res.data;
         const pts = Array.isArray(j.points) ? j.points : [];
         const last = pts[pts.length - 1];

@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from 'next';
 
 export const metadata: Metadata = {
   title: 'Krishi Sakhi',
-  description: 'AI-powered personal crop companion for farmers (Kerala focus)',
+  description: 'AI-powered personal crop companion for farmers (Uttar Pradesh focus)',
   manifest: '/manifest.json',
 };
 

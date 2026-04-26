@@ -1,5 +1,23 @@
 {
   "appName": "Krishi Sakhi",
   "welcome": "Welcome",
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "weather": "Weather",
+  "location": "Location",
+  "temp": "Temp",
+  "humidity": "Humidity",
+  "wind": "Wind",
+  "pest_check": "Pest check",
+  "analyze_title": "Analyze crop image for issues",
+  "analyze_button": "Analyze image",
+  "market_trends": "Market trends",
+  "ask_question": "Ask a question",
+  "get_started": "Get started",
+  "for_officers": "For officers",
+  "language": "Language",
+  "my_alerts": "My Alerts",
+  "data_saver_on": "Data Saver: ON",
+  "data_saver_off": "Data Saver: OFF",
+  "login": "Login",
+  "logout": "Logout"
 }

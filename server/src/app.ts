@@ -132,6 +132,8 @@ import { schemesRouter } from './api/routes/schemes';
 import { adminSchemesRouter } from './api/routes/adminSchemes';
 import { grievancesRouter } from './api/routes/grievances';
 import { adminGrievancesRouter } from './api/routes/adminGrievances';
+import { hardwareRouter } from './api/routes/hardware';
+
 app.use('/api/auth', authLimiter, authRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/admin/analytics', adminAnalyticsRouter);
@@ -143,6 +145,7 @@ app.use('/api/locations', locationsRouter);
 app.use('/api/weather', weatherRouter);
 app.use('/api/advisory', advisoryRouter);
 app.use('/api/market', marketRouter);
+app.use('/api/hardware', hardwareRouter);
 app.use('/api/farms', farmsRouter);
 app.use('/api/schemes', schemesRouter);
 app.use('/api/admin/schemes', adminSchemesRouter);

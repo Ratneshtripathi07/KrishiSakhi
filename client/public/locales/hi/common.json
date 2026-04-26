@@ -1,5 +1,23 @@
 {
   "appName": "कृषि सखी",
   "welcome": "स्वागत है",
-  "loading": "लोड हो रहा है..."
+  "loading": "लोड हो रहा है...",
+  "weather": "मौसम",
+  "location": "स्थान",
+  "temp": "तापमान",
+  "humidity": "नमी",
+  "wind": "हवा",
+  "pest_check": "कीट जांच",
+  "analyze_title": "समस्याओं के लिए फसल की छवि का विश्लेषण करें",
+  "analyze_button": "छवि का विश्लेषण करें",
+  "market_trends": "बाजार के रुझान",
+  "ask_question": "एक सवाल पूछें",
+  "get_started": "शुरू करें",
+  "for_officers": "अधिकारियों के लिए",
+  "language": "भाषा",
+  "my_alerts": "मेरे अलर्ट",
+  "data_saver_on": "डेटा सेवर: चालू",
+  "data_saver_off": "डेटा सेवर: बंद",
+  "login": "लॉगिन",
+  "logout": "लॉगआउट"
 }

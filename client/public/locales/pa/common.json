@@ -1,5 +1,23 @@
 {
   "appName": "ਕ੍ਰਿਸ਼ੀ ਸਖੀ",
   "welcome": "ਜੀ ਆਇਆਂ ਨੂੰ",
-  "loading": "ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ..."
+  "loading": "ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ...",
+  "weather": "ਮੌਸਮ",
+  "location": "ਸਥਾਨ",
+  "temp": "ਤਾਪਮਾਨ",
+  "humidity": "ਨਮੀ",
+  "wind": "ਹਵਾ",
+  "pest_check": "ਕੀੜੇ ਦੀ ਜਾਂਚ",
+  "analyze_title": "ਫਸਲ ਦੀ ਤਸਵੀਰ ਦੀ ਜਾਂਚ ਕਰੋ",
+  "analyze_button": "ਤਸਵੀਰ ਦੀ ਜਾਂਚ ਕਰੋ",
+  "market_trends": "ਬਾਜ਼ਾਰ ਦੇ ਰੁਝਾਨ",
+  "ask_question": "ਸਵਾਲ ਪੁੱਛੋ",
+  "get_started": "ਸ਼ੁਰੂ ਕਰੋ",
+  "for_officers": "ਅਧਿਕਾਰੀਆਂ ਲਈ",
+  "language": "ਭਾਸ਼ਾ",
+  "my_alerts": "ਮੇਰੇ ਅਲਰਟ",
+  "data_saver_on": "ਡਾਟਾ ਸੇਵਰ: ਚਾਲੂ",
+  "data_saver_off": "ਡਾਟਾ ਸੇਵਰ: ਬੰਦ",
+  "login": "ਲੌਗਇਨ",
+  "logout": "ਲੌਗਆਊਟ"
 }

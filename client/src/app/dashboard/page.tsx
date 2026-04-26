@@ -59,6 +59,10 @@ export default function DashboardPage() {
   const [timeline, setTimeline] = useState<{ text: string }[]>([]);
   const [schemes, setSchemes] = useState<{ id: number; title: string }[]>([]);
   const [sideOpen, setSideOpen] = useState(false);
+  
+  // IoT Hardware Data
+  const [hardwareData, setHardwareData] = useState<any | null>(null);
+  const [hardwareError, setHardwareError] = useState<string | null>(null);
 
   // Market data for major crops
   const crops = ['Rice','Coconut','Banana','Pepper'];
@@ -180,6 +184,26 @@ export default function DashboardPage() {
         setSchemes(s);
       } catch {}
     })();
+  }, []);
+
+  // IoT Sensor data polling
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    const fetchHardware = async () => {
+      try {
+        // Defaults to farm id 1 for hackathon demo
+        const { data } = await api.get('/hardware/data/1');
+        if (Array.isArray(data) && data.length > 0) {
+           setHardwareData(data[0]); // Grabbing only the latest reading
+        }
+      } catch {
+        setHardwareError('Could not load sensor data');
+      }
+    };
+    
+    fetchHardware(); // Initial load
+    interval = setInterval(fetchHardware, 30000); // 30 sec polling
+    return () => clearInterval(interval);
   }, []);
 
   const locationText = useMemo(() => {
@@ -379,6 +403,46 @@ export default function DashboardPage() {
               </div>
             </CardWrap>
           </div>
+
+          {/* IoT Hardware Integration */}
+          <CardWrap className="p-5">
+            <div className="flex items-start justify-between gap-3 mb-4">
+              <div className="flex items-center gap-3">
+                <Cpu className="w-6 h-6 text-emerald-700" />
+                <div className="text-lg font-semibold">IoT Field Sensors</div>
+              </div>
+              <a href="/hardware" className="text-sm text-emerald-700 hover:underline">View Ledger</a>
+            </div>
+            
+            {hardwareError ? (
+              <div className="text-sm text-red-600 dark:text-red-400">{hardwareError}</div>
+            ) : !hardwareData ? (
+              <div className="text-sm text-gray-700 dark:text-gray-300">Waiting for transmission...</div>
+            ) : (
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                <div className="bg-gray-50 dark:bg-[#222] p-3 rounded-xl shadow-inner text-center">
+                  <div className="text-xs text-gray-500 mb-1">Air Temp</div>
+                  <div className="text-xl text-emerald-700 dark:text-emerald-400 font-bold">{hardwareData.air_temp}°C</div>
+                </div>
+                <div className="bg-gray-50 dark:bg-[#222] p-3 rounded-xl shadow-inner text-center">
+                  <div className="text-xs text-gray-500 mb-1">Air Hum</div>
+                  <div className="text-xl text-emerald-700 dark:text-emerald-400 font-bold">{hardwareData.humidity}%</div>
+                </div>
+                <div className="bg-gray-50 dark:bg-[#222] p-3 rounded-xl shadow-inner text-center">
+                  <div className="text-xs text-gray-500 mb-1">Soil Mst</div>
+                  <div className="text-xl text-cyan-700 dark:text-cyan-400 font-bold">{hardwareData.moisture}%</div>
+                </div>
+                <div className="bg-gray-50 dark:bg-[#222] p-3 rounded-xl shadow-inner text-center">
+                  <div className="text-xs text-gray-500 mb-1">NPK</div>
+                  <div className="text-lg text-emerald-800 dark:text-emerald-300 font-bold">{hardwareData.n_level}-{hardwareData.p_level}-{hardwareData.k_level}</div>
+                </div>
+                <div className="bg-gray-50 dark:bg-[#222] p-3 rounded-xl shadow-inner text-center md:col-span-4 lg:col-span-1">
+                  <div className="text-xs text-gray-500 mb-1">Soil pH</div>
+                  <div className="text-xl text-purple-700 dark:text-purple-400 font-bold">{hardwareData.ph_level}</div>
+                </div>
+              </div>
+            )}
+          </CardWrap>
 
           {/* Market section */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

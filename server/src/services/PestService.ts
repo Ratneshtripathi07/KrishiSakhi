@@ -47,16 +47,18 @@ export class PestService {
         const models: { name?: string }[] = Array.isArray(j?.models) ? j.models : [];
         const names = models.map((m) => m.name || '').filter(Boolean);
         const pickFull =
-          names.find((n) => n.includes('gemini-1.5-pro')) ||
+          names.find((n) => n.includes('gemini-2.5-flash')) ||
+          names.find((n) => n.includes('gemini-2.0-flash')) ||
           names.find((n) => n.includes('gemini-1.5-flash')) ||
+          names.find((n) => n.includes('gemini-1.5-pro')) ||
           names.find((n) => n.includes('gemini-1.0-pro')) ||
           '';
-        const id = pickFull ? (pickFull.startsWith('models/') ? pickFull.slice('models/'.length) : pickFull) : 'gemini-1.5-pro';
+        const id = pickFull ? (pickFull.startsWith('models/') ? pickFull.slice('models/'.length) : pickFull) : 'gemini-1.5-flash';
         PestService.resolvedModel = id;
         return id;
       }
     } catch {}
-    return 'gemini-1.5-pro';
+    return 'gemini-1.5-flash';
   }
 
   private async callGemini(parts: any[]): Promise<any> {

@@ -1,5 +1,23 @@
 {
   "appName": "കൃഷി സഖി",
   "welcome": "സ്വാഗതം",
-  "loading": "ലോഡിംഗ്..."
+  "loading": "ലോഡിംഗ്...",
+  "weather": "കാലാവസ്ഥ",
+  "location": "സ്ഥലം",
+  "temp": "താപനില",
+  "humidity": "ഈർപ്പം",
+  "wind": "കാറ്റ്",
+  "pest_check": "കീട പരിശോധന",
+  "analyze_title": "വിളകളുടെ ചിത്രം പരിശോധിക്കുക",
+  "analyze_button": "ചിത്രം പരിശോധിക്കുക",
+  "market_trends": "വിപണി നിലവാരം",
+  "ask_question": "ചോദ്യങ്ങൾ ചോദിക്കുക",
+  "get_started": "ആരംഭിക്കുക",
+  "for_officers": "ഉദ്യോഗസ്ഥർക്കായി",
+  "language": "ഭാഷ",
+  "my_alerts": "അറിയിപ്പുകൾ",
+  "data_saver_on": "ഡാറ്റ സേവർ: ഓൺ",
+  "data_saver_off": "ഡാറ്റ സേവർ: ഓഫ്",
+  "login": "ലോഗിൻ",
+  "logout": "ലോ​ഗ് ഔട്ട്"
 }

@@ -47,7 +47,7 @@ export default function AdminLoginPage() {
       <div className="mx-auto max-w-md min-h-[80vh] flex items-center justify-center py-12 md:py-16">
         <div className="w-full rounded-2xl bg-white shadow-xl border p-6 md:p-8">
           <h1 className="text-2xl font-semibold tracking-tight mb-1">{label(t, 'admin_login', 'Admin login')}</h1>
-          <p className="text-gray-600 text-sm mb-4">{label(t, 'gov_email_note', 'Use your official government email (e.g., @kerala.gov.in, @punjab.gov.in, @up.gov.in)')}</p>
+          <p className="text-gray-600 text-sm mb-4">{label(t, 'gov_email_note', 'Use your official government email (e.g., @up.gov.in, @kerala.gov.in, @punjab.gov.in)')}</p>
 
           <div className="space-y-3">
             <Label>{t('email') || 'Email'}</Label>
@@ -55,7 +55,7 @@ export default function AdminLoginPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="officer@kerala.gov.in"
+              placeholder="officer@up.gov.in"
             />
           </div>
 

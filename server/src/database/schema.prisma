@@ -67,6 +67,7 @@ model Farm {
   user                 User         @relation(fields: [user_id], references: [id], onDelete: Cascade)
   metrics              FarmMetrics?
   tasks                Task[]
+  sensorData           SensorData[]
 
   @@index([user_id])
 }
@@ -179,4 +180,22 @@ model Grievance {
 
   @@index([user_id])
   @@index([status])
+}
+
+model SensorData {
+  id        Int      @id @default(autoincrement())
+  farm_id   Int
+  air_temp  Float?
+  humidity  Float?
+  soil_temp Float?
+  moisture  Int?
+  n_level   Int?
+  p_level   Int?
+  k_level   Int?
+  ph_level  Float?
+  timestamp DateTime @default(now())
+  farm      Farm     @relation(fields: [farm_id], references: [id], onDelete: Cascade)
+
+  @@index([farm_id])
+  @@index([timestamp])
 }
