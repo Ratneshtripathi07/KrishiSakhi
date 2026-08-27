@@ -158,10 +158,10 @@ export default function Page() {
               <div className="flex items-start gap-4 h-full">
                 <Bug className="w-9 h-9 text-emerald-700" />
                 <div className="flex-1 flex flex-col min-w-0">
-<h3 className="text-lg font-semibold truncate" title={label(t, 'pest_check')}>{label(t, 'pest_check')}</h3>
-                  <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">{label(t, 'analyze_title', 'Analyze crop image for issues')}</p>
+                  <h3 className="text-lg font-semibold truncate" title={t('pest_check') || 'Pest Detection'}>{t('pest_check') || 'Pest Detection'}</h3>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">{t('analyze_title') || 'Analyze crop image for issues'}</p>
                   <div className="mt-auto pt-3">
-                    <Button href="/pest-detection" variant="outline" size="sm" className="w-max">{label(t, 'analyze_button', 'Analyze image')}</Button>
+                    <Button href="/pest-detection" variant="outline" size="sm" className="w-max">{t('analyze_button') || 'Analyze image'}</Button>
                   </div>
                 </div>
               </div>
@@ -172,7 +172,7 @@ export default function Page() {
               <div className="flex items-start gap-4">
                 <LineChart className="w-9 h-9 text-emerald-700" />
                 <div className="flex-1">
-<h3 className="text-lg font-semibold">{label(t, 'market_trends')}</h3>
+                  <h3 className="text-lg font-semibold">{t('market_trends') || 'Market Trends'}</h3>
                   <div className="mt-1 text-sm text-gray-700 dark:text-gray-300 flex items-center gap-2">
                     <span>Rice:</span>
                     <span className="font-medium">{Number.isFinite(price?.curr) ? `${Math.round(price!.curr!)} ₹` : '—'}</span>
@@ -192,8 +192,8 @@ export default function Page() {
               <div className="flex items-start gap-4">
                 <MessageSquare className="w-9 h-9 text-emerald-700" />
                 <div>
-<h3 className="text-lg font-semibold">{label(t, 'ask_question')}</h3>
-                  <p className="text-sm text-gray-700 dark:text-gray-300">Get simple answers and advisories.</p>
+                  <h3 className="text-lg font-semibold">{t('ask_question') || 'Ask AI Assistant'}</h3>
+                  <p className="text-sm text-gray-700 dark:text-gray-300">{t('chat_desc') || 'Get simple answers and advisories.'}</p>
                 </div>
               </div>
             </a>
@@ -203,8 +203,8 @@ export default function Page() {
               <div className="flex items-start gap-4">
                 <LogIn className="w-9 h-9 text-emerald-700" />
                 <div>
-<h3 className="text-lg font-semibold">{label(t, 'get_started')}</h3>
-                  <p className="text-sm text-gray-700 dark:text-gray-300">Access your dashboard and personalized advisories.</p>
+                  <h3 className="text-lg font-semibold">{t('get_started') || 'Farmer Login'}</h3>
+                  <p className="text-sm text-gray-700 dark:text-gray-300">{t('farmer_login_desc') || 'Access your dashboard and personalized advisories.'}</p>
                 </div>
               </div>
             </a>
@@ -214,8 +214,8 @@ export default function Page() {
               <div className="flex items-start gap-4">
                 <ShieldCheck className="w-9 h-9 text-emerald-700" />
                 <div>
-                  <h3 className="text-lg font-semibold">{label(t, 'for_officers', 'For officers')}</h3>
-                  <p className="text-sm text-gray-700 dark:text-gray-300">Access admin tools and geo analytics.</p>
+                  <h3 className="text-lg font-semibold">{t('for_officers') || 'For officers'}</h3>
+                  <p className="text-sm text-gray-700 dark:text-gray-300">{t('admin_desc') || 'Access admin tools and geo analytics.'}</p>
                 </div>
               </div>
             </a>

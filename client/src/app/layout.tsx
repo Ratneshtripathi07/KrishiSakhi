@@ -18,8 +18,6 @@ import { DataSaverProvider } from '@/lib/dataSaver';
 import InstallPrompt from '@/components/pwa/InstallPrompt';
 import { ThemeProvider } from '@/lib/theme';
 import BottomNav from '@/components/BottomNav';
-import FloatingMicFab from '@/components/FloatingMicFab';
-import HideOnRoutes from '@/components/HideOnRoutes';
 import ChunkReload from '@/components/pwa/ChunkReload';
 
 import ServerStatusNotice from '@/components/ServerStatusNotice';
@@ -41,10 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <DataSaverProvider>
               <ServerStatusNotice />
               <Header />
-<main className="mx-auto max-w-3xl px-4 py-6 pb-6 md:pb-0">{children}</main>
-              <HideOnRoutes prefixes={["/admin"]}>
-                <FloatingMicFab />
-              </HideOnRoutes>
+              <main className="mx-auto max-w-3xl px-4 py-6 pb-6 md:pb-0">{children}</main>
               <BottomNav />
               {/* Register service worker for PWA */}
               <SWRegister />
