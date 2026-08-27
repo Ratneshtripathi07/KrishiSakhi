@@ -22,6 +22,8 @@ import FloatingMicFab from '@/components/FloatingMicFab';
 import HideOnRoutes from '@/components/HideOnRoutes';
 import ChunkReload from '@/components/pwa/ChunkReload';
 
+import ServerStatusNotice from '@/components/ServerStatusNotice';
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -37,6 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <I18nProvider>
           <ThemeProvider>
             <DataSaverProvider>
+              <ServerStatusNotice />
               <Header />
 <main className="mx-auto max-w-3xl px-4 py-6 pb-6 md:pb-0">{children}</main>
               <HideOnRoutes prefixes={["/admin"]}>

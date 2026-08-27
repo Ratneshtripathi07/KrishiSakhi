@@ -128,16 +128,27 @@ export default function Header() {
             {mode === 'dark' ? <Sun className="w-5 h-5" aria-hidden="true" /> : <Moon className="w-5 h-5" aria-hidden="true" />}
           </button>
 
-          {/* More menu for Data Saver */}
-<div ref={moreRef} className="relative">
+          {/* More menu for Data Saver & Server Status */}
+          <div ref={moreRef} className="relative">
             <button onClick={() => setMoreOpen((o) => !o)} className="text-gray-700 dark:text-gray-200 hover:text-brand dark:hover:text-brand-light" aria-haspopup="menu" aria-expanded={moreOpen} title="More">
               <MoreVertical className="w-5 h-5" aria-hidden="true" />
             </button>
             {moreOpen && (
-              <div className="absolute right-0 mt-2 bg-white dark:bg-[#1E1E1E] border dark:border-gray-700 rounded shadow text-sm min-w-[180px] z-50 py-1 text-gray-800 dark:text-gray-100">
+              <div className="absolute right-0 mt-2 bg-white dark:bg-[#1E1E1E] border dark:border-gray-700 rounded shadow text-sm min-w-[190px] z-50 py-1 text-gray-800 dark:text-gray-100">
                 <a href="/settings" className="block px-3 py-1.5 hover:bg-gray-50 dark:hover:bg-[#222]">Settings</a>
                 <button onClick={() => setDataSaver(!dataSaver)} className="block w-full text-left px-3 py-1.5 hover:bg-gray-50 dark:hover:bg-[#222]">
                   {dataSaver ? (t('data_saver_on') || 'Data Saver: ON') : (t('data_saver_off') || 'Data Saver: OFF')}
+                </button>
+                <button
+                  onClick={() => {
+                    setMoreOpen(false);
+                    if (typeof window !== 'undefined') {
+                      window.dispatchEvent(new CustomEvent('open-server-status-modal'));
+                    }
+                  }}
+                  className="block w-full text-left px-3 py-1.5 hover:bg-amber-50 dark:hover:bg-amber-950/40 text-amber-800 dark:text-amber-300 font-medium text-xs"
+                >
+                  ⚡ {t('serverStatus') || 'Server Status'} (Free Tier)
                 </button>
               </div>
             )}

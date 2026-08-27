@@ -1,5 +1,25 @@
 {
   "appName": "Krishi Sakhi",
   "welcome": "Welcome",
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "freeTierTitle": "Free-Tier Deployment Notice",
+  "serverWakingUp": "Waking up backend server (Render free tier cold start ~50s)...",
+  "serverConnected": "Backend server & services are connected.",
+  "serverConnectedDbPaused": "Backend is active, but Supabase database appears paused.",
+  "dbPausedNotice": "If the Supabase project itself is paused, database activities (login, profiles, saved data) will not work, but non-DB features (Weather, AI Advisory) remain active.",
+  "freeTierBannerShort": "Notice: Free-tier Render backend takes ~50s to wake up. If Supabase DB is paused, DB-related features won't work, while rest of backend works.",
+  "serverStatus": "Server Status",
+  "wakingUp": "Waking Up...",
+  "connected": "Connected",
+  "dbPaused": "DB Paused",
+  "connecting": "Connecting...",
+  "offline": "Offline / Slow",
+  "retry": "Retry",
+  "details": "Details",
+  "close": "Close",
+  "whyTitle": "About Free Tier Hosting & Availability",
+  "renderNoticeDesc": "The backend is hosted on Render's free tier. Inactive instances spin down and require ~50 seconds to boot on first request.",
+  "supabaseNoticeDesc": "The PostgreSQL database is hosted on Supabase free tier. Inactive projects may be paused. While paused, database-dependent features (User Authentication, Saved Farms, Market Listings, Grievance tracking) will not work until unpaused in Supabase.",
+  "nonDbNoticeDesc": "Non-database backend capabilities (Real-time Weather, AI Advisory rules, Crop calculators, Mandi price estimates) will continue to work normally once the backend wakes up.",
+  "gotIt": "Got it"
 }

@@ -35,10 +35,10 @@ export type ApiProblem = {
 // Determine API base URL. Prefer NEXT_PUBLIC_API_BASE to bypass Next.js rewrites if needed.
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE || '/api';
 
-// Primary Axios (can point to ngrok) and a same-origin fallback client (/api -> Next dev rewrite)
+// Primary Axios (can point to ngrok/render) and a same-origin fallback client (/api -> Next dev rewrite)
 const api: AxiosInstance = axios.create({
   baseURL: API_BASE,
-  timeout: 12000,
+  timeout: 60000,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -46,7 +46,7 @@ const api: AxiosInstance = axios.create({
 
 const fallbackApi: AxiosInstance = axios.create({
   baseURL: '/api',
-  timeout: 12000,
+  timeout: 60000,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -98,4 +98,41 @@ api.interceptors.response.use(
   },
 );
 
-export { api, TOKEN_KEY };
+export interface ServerHealthResponse {
+  status: string;
+  server?: string;
+  database?: 'connected' | 'paused_or_unavailable' | 'unknown';
+  env?: string;
+  timestamp?: string;
+  freeTierNotice?: {
+    render?: string;
+    supabase?: string;
+    message?: string;
+  };
+}
+
+export async function checkServerHealth(): Promise<ServerHealthResponse> {
+  const base = (API_BASE || '').replace(/\/+$/, '');
+  const candidates = [
+    base ? (base.endsWith('/api') ? `${base}/health` : `${base}/api/health`) : '/api/health',
+    base ? `${base}/health` : '/health',
+    '/api/health',
+    '/health',
+  ];
+
+  let lastError: any = null;
+  for (const url of candidates) {
+    try {
+      const res = await axios.get<ServerHealthResponse>(url, { timeout: 60000 });
+      if (res.data && (res.status === 200 || res.status === 304)) {
+        return res.data;
+      }
+    } catch (err) {
+      lastError = err;
+    }
+  }
+  throw lastError || new Error('Failed to reach backend health endpoint');
+}
+
+export { api, TOKEN_KEY, API_BASE };
+

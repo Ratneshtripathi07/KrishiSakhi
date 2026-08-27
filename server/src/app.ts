@@ -86,9 +86,35 @@ app.use(generalLimiter);
 // Serve uploads (local disk)
 app.use('/uploads', (req, res, next) => { res.setHeader('Cross-Origin-Resource-Policy', 'same-site'); next(); }, express.static(path.resolve(__dirname, './uploads')));
 
-// Health check for uptime probes and CI
-app.get('/health', (_req: Request, res: Response) => {
-  return res.status(200).json({ status: 'ok', env: env.NODE_ENV, timestamp: new Date().toISOString() });
+import { prisma } from './config/database';
+
+// Health check for uptime probes, client warmup, and DB status detection
+app.get(['/health', '/api/health'], async (_req: Request, res: Response) => {
+  let dbStatus: 'connected' | 'paused_or_unavailable' = 'paused_or_unavailable';
+  try {
+    // Fast 3-second check to see if database (e.g. Supabase) is active or paused
+    const dbCheck = prisma.$queryRawUnsafe('SELECT 1');
+    const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('DB check timeout')), 3000));
+    await Promise.race([dbCheck, timeout]);
+    dbStatus = 'connected';
+  } catch (err: any) {
+    dbStatus = 'paused_or_unavailable';
+  }
+
+  return res.status(200).json({
+    status: 'ok',
+    server: 'online',
+    database: dbStatus,
+    env: env.NODE_ENV,
+    timestamp: new Date().toISOString(),
+    freeTierNotice: {
+      render: 'online',
+      supabase: dbStatus === 'connected' ? 'active' : 'paused_or_unavailable',
+      message: dbStatus === 'connected'
+        ? 'Render backend and Supabase database are online.'
+        : 'Render backend is online. If Supabase project is paused, database features (login, profile, saved data) will be unavailable until unpaused. Non-database features (weather, AI advisory) remain functional.'
+    }
+  });
 });
 
 // Root landing route with helpful API info
@@ -96,10 +122,12 @@ app.get('/', (_req: Request, res: Response) => {
   return res.status(200).json({
     name: 'krishi-mitra API',
     status: 'ok',
+    server: 'online',
     env: env.NODE_ENV,
     timestamp: new Date().toISOString(),
     endpoints: [
       '/health',
+      '/api/health',
       '/api/auth',
       '/api/admin',
       '/api/admin/analytics',
