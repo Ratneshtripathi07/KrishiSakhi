@@ -2,3 +2,5 @@
 
 2. deployed successfully and stable. 
 issues as of now: API integrations not smooth with render. tweaks after this commit.
+
+3. In case the live project is paused, a working demo of version 1 can be seen at https://youtu.be/hjZEFUArjqA?si=NeOdoQ7j0CgQ7DA3

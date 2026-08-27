@@ -16,7 +16,9 @@ import {
   Zap,
   Clock,
   Layers,
-  Sparkles
+  Sparkles,
+  Video,
+  ExternalLink
 } from 'lucide-react';
 
 export type ServerStatusState = 'checking' | 'waking_up' | 'connected' | 'db_paused' | 'error';
@@ -183,14 +185,24 @@ export default function ServerStatusNotice() {
 
           {status === 'db_paused' && (
             <div className="bg-amber-50 dark:bg-amber-950/30 border-b border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 px-3.5 py-2 sm:px-4 shadow-sm">
-              <div className="max-w-6xl mx-auto flex items-center justify-between gap-3 text-xs sm:text-sm">
+              <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 sm:gap-3 text-xs sm:text-sm">
                 <div className="flex items-center gap-2">
                   <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
                   <span>
                     <strong>Backend Active:</strong> Supabase DB appears paused. Database activities (Login, Saved Farms) won&apos;t work, but Weather & Advisory remain functional.
                   </span>
                 </div>
-                <div className="flex items-center gap-2 shrink-0">
+                <div className="flex items-center gap-2 shrink-0 self-end sm:self-center">
+                  <a
+                    href="https://youtu.be/hjZEFUArjqA?si=NeOdoQ7j0CgQ7DA3"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded bg-amber-200/80 hover:bg-amber-300/80 dark:bg-amber-900/60 dark:hover:bg-amber-800/60 text-amber-950 dark:text-amber-100 transition-colors"
+                  >
+                    <Video className="w-3.5 h-3.5" />
+                    <span>{t('watchDemo') || 'Watch Demo (v1)'}</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
                   <button
                     onClick={() => setShowModal(true)}
                     className="underline hover:text-amber-950 dark:hover:text-white font-medium text-xs sm:text-sm"
@@ -429,7 +441,39 @@ export default function ServerStatusNotice() {
                   </div>
                 </div>
 
-                {/* 3. Feature Breakdown Matrix */}
+                {/* 3. Working Demo Video Card */}
+                <div className="p-3.5 rounded-xl border border-blue-200/80 dark:border-blue-900/50 bg-blue-50/50 dark:bg-blue-950/20">
+                  <div className="flex items-start gap-3">
+                    <div className="p-1.5 rounded-lg bg-blue-500/15 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5">
+                      <Video className="w-4 h-4" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between gap-2">
+                        <h4 className="font-semibold text-xs text-blue-950 dark:text-blue-200 uppercase tracking-wide">
+                          3. {t('demoVideoTitle') || 'Working Demo (Version 1)'}
+                        </h4>
+                      </div>
+                      <p className="text-xs text-gray-700 dark:text-gray-300 mt-1 leading-relaxed">
+                        {t('demoVideoDesc') ||
+                          'If the live project or database is currently paused, a complete recorded demonstration of Version 1 in action is available on YouTube.'}
+                      </p>
+                      <div className="mt-2.5 flex justify-end">
+                        <a
+                          href="https://youtu.be/hjZEFUArjqA?si=NeOdoQ7j0CgQ7DA3"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition-colors"
+                        >
+                          <Video className="w-3.5 h-3.5" />
+                          <span>{t('watchDemoVideo') || 'Watch Demo on YouTube'}</span>
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 4. Feature Breakdown Matrix */}
                 <div className="p-3.5 rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-[#161618]">
                   <h4 className="font-semibold text-xs text-gray-800 dark:text-gray-200 uppercase tracking-wide mb-2.5 flex items-center gap-1.5">
                     <Sparkles className="w-3.5 h-3.5 text-brand dark:text-brand-light" />

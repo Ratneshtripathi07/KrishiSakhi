@@ -17,6 +17,16 @@ export default function Footer() {
             <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
               <li><a href="#about" className="hover:underline">{t('about_platform') || 'About the Platform'}</a></li>
               <li><a href="#features" className="hover:underline">{t('features_how_it_works') || 'Features / How it Works'}</a></li>
+              <li>
+                <a
+                  href="https://youtu.be/hjZEFUArjqA?si=NeOdoQ7j0CgQ7DA3"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:underline inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-medium"
+                >
+                  <span>{t('watch_demo') || 'Working Demo (v1)'}</span> ↗
+                </a>
+              </li>
               <li><a href="/schemes" className="hover:underline">{t('govt_schemes') || 'Government Scheme Info'}</a></li>
               <li><a href="/feedback" className="hover:underline">{t('contact_us') || 'Contact Us'}</a></li>
             </ul>

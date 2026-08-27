@@ -2,6 +2,9 @@
 
 AI-powered personal crop companion focused on farmer usability, offline-first access (PWA), and multilingual support. This monorepo contains a Next.js 14 client and an Express/Prisma API server with PostgreSQL.
 
+> 📺 **Live Demo Video (Version 1)**: In case the live project or database is paused, a full working demo of the project's version 1 can be viewed at:  
+> 🔗 **[https://youtu.be/hjZEFUArjqA?si=NeOdoQ7j0CgQ7DA3](https://youtu.be/hjZEFUArjqA?si=NeOdoQ7j0CgQ7DA3)**
+
 - Frontend: Next.js 14 (App Router), React 18, Tailwind CSS, next-pwa, next-i18next, Zustand
 - Backend: Node.js ≥18, Express 4, Prisma ORM, PostgreSQL, JWT (pino/helmet/cors/rate limits)
 - Integrations: Open‑Meteo (weather, no key), optional LLM (Gemini via Google Gen AI), optional Twilio for SMS/OTP, optional data.gov.in pincode
